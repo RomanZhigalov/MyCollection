@@ -26,7 +26,11 @@ namespace MyCollection
             {
                 Console.WriteLine($"{p.Pasport.series} {p.Pasport.number} {p.Name} {p.Surname} \n");
             }
+            Dictionary<Cat, People> dic = new Dictionary<Cat, People>();
+            dic.Add(simon, ivan);
+            dic.Add(simon, sergey);
             Console.ReadKey();
+
         }
     }
 }

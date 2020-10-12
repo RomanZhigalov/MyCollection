@@ -6,17 +6,14 @@ using System.Threading.Tasks;
 
 namespace MyCollection
 {
-    struct Pasport : IComparable<Pasport>, IEquatable<Pasport>
+    struct Pasport : IEquatable<Pasport>
     {
         internal int series;
         internal int number;
-        public int CompareTo(Pasport other)
+        public Pasport(int series, int number)
         {
-            if (this.number == other.number || this.series == other.series)
-            {
-                return 0;
-            }
-            return this.series.CompareTo(other.series);
+            this.series = series;
+            this.number = number;
         }
         public bool Equals(Pasport other)
         {
@@ -42,8 +39,8 @@ namespace MyCollection
         }
         public bool Equals(People other)
         {
-            if(this.Pasport.CompareTo(other.pasport) == 0 ||
-                this.Name == other.Name || 
+            if (this.Pasport.Equals(other.pasport) ||
+                this.Name == other.Name ||
                 this.Surname == other.Surname)
             {
                 return true;
