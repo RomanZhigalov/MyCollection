@@ -8,8 +8,8 @@ namespace MyCollection
 {
     class Cat : IEquatable<Cat>
     {
-        string Name { get; set; }
-        int Age { get; set; }
+        public string Name { get;  private set; }
+        public int Age { get; private set; }
         public Cat (string name, int age)
         {
             Name = name;
