@@ -11,19 +11,19 @@ namespace MyCollection
         static void Main(string[] args)
         {
 
-            People oleg = new People(4681, 876434, "Oleg", "Olegov");
-            People ivan = new People(2005, 468137, "Ivan", "Ivanov");
-            People sergey = new People(6575, 687845, "Sergey", "Sergeev");
+            Person oleg = new Person(4681, 876434, "Oleg", "Olegov");
+            Person ivan = new Person(2005, 468137, "Ivan", "Ivanov");
+            Person sergey = new Person(6575, 687845, "Sergey", "Sergeev");
             Cat barsik = new Cat("Barsik", 3);
             Cat simon = new Cat("Simon", 7);
             Cat kitty = new Cat("Simon", 7);
 
-            MyCollection<Cat, Pasport, People> col = new MyCollection<Cat, Pasport, People>();
+            MyCollection<Cat, Pasport, Person> col = new MyCollection<Cat, Pasport, Person>();
             col.Add(barsik, oleg.Pasport, oleg);
             col.Add(simon, ivan.Pasport, ivan);
             col.Add(kitty, sergey.Pasport, sergey);
 
-            foreach (People p in col.GetValues(new Cat("Simon", 7)))
+            foreach (Person p in col.GetValues(new Cat("Simon", 7)))
             {
                 Console.WriteLine($"{p.Pasport.series} {p.Pasport.number} {p.Name} {p.Surname} \n");
             }

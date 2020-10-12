@@ -24,20 +24,20 @@ namespace MyCollection
             return false;
         }
     }
-    class People : IEquatable<People>
+    class Person : IEquatable<Person>
     {
         private Pasport pasport;
         public Pasport Pasport { get { return pasport; } }
         public string Name { get; private set; }
         public string Surname { get; private set; }
-        public People (int pasportSeries, int pasportNumber, string name, string surname)
+        public Person (int pasportSeries, int pasportNumber, string name, string surname)
         {
             this.pasport.series = pasportSeries;
             this.pasport.number = pasportNumber;
             Name = name;
             Surname = surname;
         }
-        public bool Equals(People other)
+        public bool Equals(Person other)
         {
             if (this.Pasport.Equals(other.pasport) ||
                 this.Name == other.Name ||

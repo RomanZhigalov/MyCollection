@@ -61,7 +61,7 @@
   <ItemGroup>
     <Compile Include="Cat.cs" />
     <Compile Include="MyCollection.cs" />
-    <Compile Include="People.cs" />
+    <Compile Include="Person.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
