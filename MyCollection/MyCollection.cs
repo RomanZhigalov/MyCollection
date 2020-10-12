@@ -34,7 +34,7 @@ namespace MyCollection
     /// This class contains values(Tvalue) with composite key (Tkey_1, Tkey_2)
     /// Key_1, Key_2 and Value shoud implement IEquatable, which provides a correct camparison
     /// </summary>
-    class MyCollection<Tkey_1, Tkey_2, Tvalue> 
+    class MyCollection<Tkey_1, Tkey_2, Tvalue> : IEnumerable
         where Tkey_1 : IEquatable<Tkey_1> 
         where Tkey_2 : IEquatable<Tkey_2>
         where Tvalue : IEquatable<Tvalue>
@@ -60,7 +60,7 @@ namespace MyCollection
         public List<Tkey_2> Keys_2 { get { return keys_2; } }
 
         /// <returns>
-        /// The value associated with the specified key.
+        /// The value associated with the composite key.
         /// If the specified key is not found, a get operation throws a System.Collections.Generic.KeyNotFoundException,
         /// and a set operation creates a new element with the specified key.
         /// </returns>
@@ -93,21 +93,13 @@ namespace MyCollection
         { 
             get
             {
-                List<Tvalue> tvalues = new List<Tvalue>();
-                foreach(Tvalue val in values.Values)
-                {
-                    tvalues.Add(val);
-                }
-                return tvalues;
+                return values.Values.ToList<Tvalue>();
             }
         }
 
         public MyCollection()
         {
-            count = 0;
-            keys_1 = new List<Tkey_1>();
-            keys_2 = new List<Tkey_2>();
-            values = new Dictionary<CompositeKey<Tkey_1, Tkey_2>, Tvalue>();
+            Clear();
         }
 
         /// <summary>
@@ -127,7 +119,7 @@ namespace MyCollection
         }
 
         /// <summary>
-        /// Removes the value with the specified key from the Collection(Tkey_1, Tkey_2, Tvalue>)
+        /// Removes the value with the composite key from the Collection(Tkey_1, Tkey_2, Tvalue>)
         /// </summary>
         /// <returns>
         /// true - if the element is successfully found and removed; if elemet not found - false.
@@ -146,6 +138,17 @@ namespace MyCollection
             return true;
         }
 
+        /// <summary>
+        /// Clears the current collection.
+        /// </summary>
+        public void Clear()
+        {
+            count = 0;
+            keys_1 = new List<Tkey_1>();
+            keys_2 = new List<Tkey_2>();
+            values = new Dictionary<CompositeKey<Tkey_1, Tkey_2>, Tvalue>();
+        }
+
         /// <returns>
         /// The collection associated with the one part of composite key. 
         /// If the specified key is not found, a get operation throws a System.Collections.Generic.KeyNotFoundException.
@@ -157,6 +160,7 @@ namespace MyCollection
                 throw new KeyNotFoundException();
             }
             List<Tvalue> tvalues = new List<Tvalue>();
+            
             foreach(CompositeKey<Tkey_1, Tkey_2> key in values.Keys)
             {
                 if (key.Key_1.Equals(key_1))
@@ -198,7 +202,7 @@ namespace MyCollection
 
         /// <returns>
         /// true if the Collection(Tkey_1, Tkey_2, Tvalue) contains an element with
-        /// the specified composite key (Tkey_1, Tkey_2); otherwise, false.
+        /// the composite key (Tkey_1, Tkey_2); otherwise, false.
         /// </returns>
         public bool ContainsKey(Tkey_1 key_1, Tkey_2 key_2)
         {
@@ -222,6 +226,11 @@ namespace MyCollection
         public bool ContainsKey(Tkey_2 key_2)
         {
             return Keys_2.Contains(key_2);
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            return this.GetEnumerator();
         }
     }
 }
